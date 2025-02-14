@@ -73,6 +73,14 @@
         .table td a:hover {
             text-decoration: underline;
         }
+        /* Ensure table responsiveness */
+.container {
+    overflow-x: auto;
+    max-width: 100%;
+
+  
+}
+
         /* Responsive Styles */
         @media (max-width: 376px) {
             .sidebar-container {
@@ -114,6 +122,8 @@
                 padding: 8px;
             }
         }
+        /* Ensure table responsiveness */
+  
     </style>
 </head>
 <body>
@@ -135,7 +145,10 @@
     </div>
    
     <div class="container mt-5">
-        <table class="table table-bordered">
+        <!-- <div class="table-responsive">
+        <table class="table table-bordered"> -->
+            <!-- <div class="table-responsive"> -->
+                <table class="table table-bordered">
             <thead>
                 <tr>
                     <th>ID</th>

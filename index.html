@@ -612,6 +612,26 @@ function populateTalukas() {
         });
     }
 }
+function addNewContact() {
+            // Create a new notification
+            const notification = document.createElement("div");
+            notification.classList.add("notification");
+
+            // Add icon and message
+            notification.innerHTML = `
+                <span>🔔</span> New lead generated!
+                <button class="close-btn" onclick="this.parentElement.remove()">✖</button>
+            `;
+
+            // Append to notification container (inside Admin Panel)
+            document.getElementById("notification-container").appendChild(notification);
+
+            // Auto-hide notification after 5 seconds
+            setTimeout(() => {
+                notification.classList.add("hide");
+                setTimeout(() => notification.remove(), 500); // Remove from DOM
+            }, 5000);
+        }
 
     </script>
 </body>
