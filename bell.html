@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Insta Finance Dashboard</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
+    <link rel="stylesheet" href="Dashboard.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <div class="dashboard-container">
+        <div class="sidebar">
+            <div class="sidebar-logo"> 
+                <a href="Dashboard.html">   
+                <img src="Logo.png" alt="Insta Finance Logo" class="logo"></a>
+            </div>
+            <ul class="nav flex-column">
+                <li class="nav-item">
+                    <a class="nav-link active" href="#" data-section="dashboard">
+                        <i class="fas fa-tachometer-alt"></i> Dashboard
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#" data-section="notification">
+                        <i class="fa-regular fa-bell"></i> Notification <span id="notificationCount" class="badge bg-danger">0</span>
+                    </a>
+                </li>
+            </ul>
+        </div>
+
+        <div class="main-wrapper">
+            <nav class="navbar navbar-expand-lg navbar-light bg-light">
+                <div class="container-fluid">
+                    <div class="d-flex align-items-center">
+                        <button class="btn btn-outline-primary me-2" id="homeBtn">
+                            <i class="fas fa-home"></i> Home
+                        </button>
+                        <button class="btn btn-outline-danger" id="logoutBtn" >
+                            <i class="fas fa-sign-out-alt"></i> Logout
+                        </button>
+                    </div>
+                    <div class="notification-icon">
+                        <i class="fa-regular fa-bell" id="bellIcon"></i>
+                        <span id="notificationBadge" class="badge bg-danger" style="display: none;">0</span>
+                        <div id="notificationDropdown" class="notification-dropdown" style="display: none;">
+                            <ul id="notificationList" class="list-group"></ul>
+                        </div>
+                    </div>
+                </div>
+            </nav>
+
+            <main class="main-content">
+                <div id="dashboardContent">
+                    <h2 class="mb-4">Dashboard</h2>
+                    <div class="table-responsive">
+                        <table class="table table-striped table-hover">
+                            <thead>
+                                <tr>
+                                    <th>Name</th>
+                                    <th>Amount Sanctioned</th>
+                                    <th>Date</th>
+                                    <th>Action</th>
+                                </tr>
+                            </thead>
+                            <tbody id="tableBody">
+                                <!-- Table rows dynamically added -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </main>
+        </div>
+    </div>
+
+    <script>
+        let notifications = [];
+        document.getElementById("bellIcon").addEventListener("click", function () {
+            const dropdown = document.getElementById("notificationDropdown");
+            dropdown.style.display = dropdown.style.display === "none" ? "block" : "none";
+        });
+
+        function addNotification(message) {
+            notifications.push(message);
+            updateNotificationUI();
+        }
+
+        function updateNotificationUI() {
+            const notificationList = document.getElementById("notificationList");
+            const notificationBadge = document.getElementById("notificationBadge");
+            notificationList.innerHTML = "";
+            
+            notifications.forEach((notif, index) => {
+                let li = document.createElement("li");
+                li.className = "list-group-item";
+                li.textContent = notif;
+                notificationList.appendChild(li);
+            });
+            
+            notificationBadge.textContent = notifications.length;
+            notificationBadge.style.display = notifications.length > 0 ? "inline-block" : "none";
+        }
+
+        // Simulate adding a new notification
+        setTimeout(() => addNotification("New Loan Application Submitted!"), 3000);
+    </script>
+</body>
+</html>
